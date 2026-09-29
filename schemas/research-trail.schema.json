@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://howintelligenceworks.com/schemas/research-trail-0.1.schema.json",
+  "title": "Research Trail 0.1 Export",
+  "type": "object",
+  "required": [
+    "schema",
+    "id",
+    "title",
+    "starting_question",
+    "mode",
+    "created_at",
+    "entries"
+  ],
+  "properties": {
+    "schema": {
+      "const": "research-trail/0.1"
+    },
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "starting_question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "exported_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "origin",
+        "title",
+        "status",
+        "created_at",
+        "previous_hash",
+        "hash"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "parent_id": {
+          "type": "string"
+        },
+        "relation": {
+          "type": "string"
+        },
+        "source_ref": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "previous_hash": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
+}

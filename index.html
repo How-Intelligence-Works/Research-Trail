@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Research Trail</title>
+<style>
+:root{--bg:#f7f7f4;--card:#fff;--ink:#17211b;--muted:#66706a;--line:#dfe4df;--accent:#254d3c;--soft:#edf4f0}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+header{border-bottom:1px solid var(--line);background:#fff}.wrap{max-width:1050px;margin:auto;padding:20px}
+.brand{font-weight:750;font-size:20px}.sub{color:var(--muted);font-size:14px;margin-top:3px}
+main{max-width:1050px;margin:28px auto;padding:0 20px 70px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:18px}
+h1{font-size:34px;margin:0 0 8px} h2{font-size:23px;margin:0 0 10px} h3{font-size:17px;margin:0 0 8px}
+p{line-height:1.55}.muted{color:var(--muted)} .small{font-size:13px}
+button,.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:650;cursor:pointer;background:var(--accent);color:#fff}
+button.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+button.ghost{background:var(--soft);color:var(--accent)}
+input,textarea,select{width:100%;padding:11px 12px;border:1px solid #cfd6d0;border-radius:9px;background:#fff;font:inherit}
+textarea{min-height:105px;resize:vertical} label{display:block;font-weight:650;margin:14px 0 6px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.choice{padding:18px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer}.choice:hover{border-color:#91a79b;background:#fbfdfc}
+.choice strong{display:block;margin-bottom:6px}.choice span{font-size:14px;color:var(--muted);line-height:1.4}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.pill{padding:6px 9px;border-radius:999px;background:var(--soft);font-size:12px}
+nav.steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.step{padding:8px 10px;border-radius:999px;background:#e9ece9;color:#657069;font-size:13px}.step.active{background:var(--accent);color:#fff}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+.hidden{display:none!important}
+.entry{border-left:4px solid #a9b8af;padding:13px 14px;margin:10px 0;background:#fbfcfb;border-radius:8px}.entry .meta{font-size:12px;color:var(--muted);margin-top:6px}
+.entry.question{border-left-color:#5279a8}.entry.source,.entry.evidence{border-left-color:#8a6b3d}.entry.hypothesis,.entry.prediction{border-left-color:#7d5ca6}.entry.finding,.entry.claim{border-left-color:#397b59}.entry.assumption{border-left-color:#a55f5f}
+.kpi{padding:16px;border:1px solid var(--line);border-radius:12px}.kpi b{font-size:26px;display:block}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:9px 7px;vertical-align:top}
+.notice{background:#fff7dd;border:1px solid #ead89a;padding:12px 14px;border-radius:9px;font-size:14px}
+@media(max-width:720px){.grid,.grid3{grid-template-columns:1fr}h1{font-size:29px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brand">Research Trail</div><div class="sub">A traceable record of how an investigation develops from question to claim.</div></div></header>
+<main>
+<section id="home">
+  <div class="card">
+    <h1>What are you trying to do?</h1>
+    <p class="muted">Research Trail records the development of an investigation without pretending that questions, ideas, hypotheses, findings and claims existed in finished form from the beginning.</p>
+    <div class="grid">
+      <div class="choice" onclick="startCase('new')"><strong>Start a new investigation</strong><span>Begin with a question or problem and record what happens as the investigation develops.</span></div>
+      <div class="choice" onclick="startCase('thought')"><strong>Capture something that changed my thinking</strong><span>A source, AI exchange, observation or analysis produced a new question, idea, assumption or interpretation.</span></div>
+      <div class="choice" onclick="startCase('hypothesis')"><strong>Develop or test a hypothesis</strong><span>Trace where a hypothesis came from, what it predicts, what evidence tests it and what happened.</span></div>
+      <div class="choice" onclick="startCase('claim')"><strong>Audit a claim</strong><span>Work backwards from a finding or manuscript claim to the evidence, analysis and reasoning that support it.</span></div>
+    </div>
+    <div style="margin-top:18px"><button class="secondary" onclick="openSaved()">Open a saved Research Trail</button><input id="fileOpen" class="hidden" type="file" accept=".json"></div>
+  </div>
+  <div class="card small muted"><b>Research Trail does not decide whether an idea is true.</b> It keeps provenance (where something came from) separate from epistemic status (what grounds currently support it).</div>
+</section>
+
+<section id="setup" class="hidden">
+ <nav class="steps"><span class="step active">1 Investigation</span><span class="step">2 Capture</span><span class="step">3 Connect</span><span class="step">4 Trail</span><span class="step">5 Audit & export</span></nav>
+ <div class="card">
+   <h2>Define the investigation</h2>
+   <label>Investigation title</label><input id="projectTitle" placeholder="e.g. What capacities are societies producing?">
+   <label>Starting question or problem</label><textarea id="startingQuestion" placeholder="What are you trying to understand, explain, test, or resolve?"></textarea>
+   <div class="grid">
+    <div><label>Investigation mode</label><select id="mode"><option>Exploratory / conceptual</option><option>Evidence synthesis</option><option>Empirical study</option><option>Method development</option><option>Mixed / other</option></select></div>
+    <div><label>Researcher / project label (optional)</label><input id="owner" placeholder="Name, team or project"></div>
+   </div>
+   <div class="actions"><button class="secondary" onclick="go('home')">Back</button><button onclick="createProject()">Begin investigation</button></div>
+ </div>
+</section>
+
+<section id="workspace" class="hidden">
+ <nav class="steps"><span class="step">1 Investigation</span><span class="step active">2 Capture</span><span class="step">3 Connect</span><span class="step">4 Trail</span><span class="step">5 Audit & export</span></nav>
+ <div class="card">
+  <h2 id="wsTitle">Investigation</h2><p id="wsQuestion" class="muted"></p>
+  <div class="toolbar">
+   <button onclick="showCapture()">Add to trail</button>
+   <button class="secondary" onclick="showTrail()">Show trail</button>
+   <button class="secondary" onclick="showAudit()">Audit & export</button>
+  </div>
+ </div>
+
+ <div id="captureCard" class="card">
+  <h2>What happened?</h2>
+  <p class="muted">Capture the event in the terms that fit it now. Its status can change later without erasing its history.</p>
+  <div class="grid">
+   <div><label>What is this?</label><select id="type">
+    <option value="question">Question</option><option value="idea">Idea / proposition</option><option value="source">Source</option><option value="evidence">Evidence</option><option value="observation">Observation</option><option value="assumption">Assumption</option><option value="interpretation">Interpretation</option><option value="hypothesis">Hypothesis</option><option value="prediction">Prediction</option><option value="analysis">Analysis</option><option value="decision">Decision</option><option value="finding">Finding</option><option value="claim">Claim</option><option value="note">Note</option>
+   </select></div>
+   <div><label>Where did it come from?</label><select id="origin">
+    <option value="human">Human / researcher</option><option value="ai">AI</option><option value="source">Published/source material</option><option value="data">Data / analysis</option><option value="joint">Human–AI interaction</option><option value="tool">Tool / software</option><option value="reviewer">Reviewer / external person</option><option value="other">Other</option>
+   </select></div>
+  </div>
+  <label>Statement / title</label><input id="entryTitle" placeholder="A concise statement of the question, idea, finding, claim…">
+  <label>Detail</label><textarea id="entryContent" placeholder="Record enough context that another person can understand what happened."></textarea>
+  <div class="grid">
+   <div><label>Current epistemic status</label><select id="status"><option>Captured — not yet evaluated</option><option>Open question</option><option>Speculative</option><option>Being investigated</option><option>Supported</option><option>Partially supported</option><option>Contradicted</option><option>Unresolved</option><option>Superseded</option><option>Rejected</option><option>Used in output</option></select></div>
+   <div><label>Related to earlier entry (optional)</label><select id="parent"><option value="">None / independent</option></select></div>
+  </div>
+  <div class="grid">
+   <div><label>Relationship (if related)</label><select id="relation"><option>prompted by</option><option>derived from</option><option>supports</option><option>contradicts</option><option>tests</option><option>refines</option><option>supersedes</option><option>uses</option><option>responds to</option><option>becomes</option></select></div>
+   <div><label>Source / identifier / URL (optional)</label><input id="sourceRef" placeholder="DOI, citation, dataset ID, Search Check export ID…"></div>
+  </div>
+  <label>Why are you recording or changing this? (optional)</label><textarea id="reason" style="min-height:70px" placeholder="Reasoning, decision note, uncertainty, correction, or context."></textarea>
+  <div class="actions"><span></span><button onclick="saveEntry()">Add to trail</button></div>
+ </div>
+
+ <div id="trailCard" class="card hidden">
+   <h2>Investigation trail</h2>
+   <p class="muted">Chronological record. Entries are not silently rewritten; later entries can refine, contradict, reject or supersede earlier ones.</p>
+   <div id="trail"></div>
+ </div>
+
+ <div id="auditCard" class="card hidden">
+   <h2>Audit & export</h2>
+   <div class="grid3">
+    <div class="kpi"><b id="countEntries">0</b><span>trail entries</span></div>
+    <div class="kpi"><b id="countOrigins">0</b><span>origins represented</span></div>
+    <div class="kpi"><b id="countClaims">0</b><span>findings / claims</span></div>
+   </div>
+   <h3 style="margin-top:22px">Traceability checks</h3>
+   <div id="checks"></div>
+   <div class="notice" style="margin-top:16px">These checks diagnose whether the record is traceable. They do not certify scientific validity or replace field-specific reporting standards.</div>
+   <h3 style="margin-top:22px">Export</h3>
+   <p class="muted">Keep a portable copy of the investigation. The JSON contains the project, entries, relationships, timestamps and integrity hashes.</p>
+   <div class="toolbar"><button onclick="downloadJSON()">Download Research Trail</button><button class="secondary" onclick="downloadCSV()">Download entries CSV</button><button class="secondary" onclick="downloadReport()">Download audit report</button></div>
+ </div>
+</section>
+</main>
+<script src="app.js"></script>
+</body></html>

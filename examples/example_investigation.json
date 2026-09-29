@@ -1,0 +1,71 @@
+{
+  "schema": "research-trail/0.1",
+  "id": "RT-DEMO",
+  "title": "Synthetic Research Trail example",
+  "starting_question": "How should a developing research claim remain traceable?",
+  "mode": "Method development",
+  "owner": "Synthetic example",
+  "created_at": "2026-09-29T12:00:00.000Z",
+  "entries": [
+    {
+      "id": "Q-demo001",
+      "type": "question",
+      "origin": "human",
+      "title": "How should a developing research claim remain traceable?",
+      "content": "Synthetic example only.",
+      "status": "Open question",
+      "parent_id": "",
+      "relation": "",
+      "source_ref": "",
+      "reason": "Initial question",
+      "created_at": "2026-09-29T12:00:00.000Z",
+      "previous_hash": "",
+      "hash": "9a3b7e255a00f4cadc5efb536893152be27239eb0747e0053ab2ce6e2b806f97"
+    },
+    {
+      "id": "P-demo002",
+      "type": "idea",
+      "origin": "human",
+      "title": "Separate provenance from epistemic status.",
+      "content": "A contribution's origin and its evidential support answer different questions.",
+      "status": "Being investigated",
+      "parent_id": "Q-demo001",
+      "relation": "derived from",
+      "source_ref": "",
+      "reason": "Conceptual distinction",
+      "created_at": "2026-09-29T12:00:00.000Z",
+      "previous_hash": "9a3b7e255a00f4cadc5efb536893152be27239eb0747e0053ab2ce6e2b806f97",
+      "hash": "445383b59919b0ec7a25d0327e9dd2458c3090247af43b21ac16423986ab381d"
+    },
+    {
+      "id": "H-demo003",
+      "type": "hypothesis",
+      "origin": "joint",
+      "title": "Explicit typed links make later claims easier to audit.",
+      "content": "A trail that distinguishes prompted-by from supports should preserve more of the reasoning structure.",
+      "status": "Speculative",
+      "parent_id": "P-demo002",
+      "relation": "derived from",
+      "source_ref": "",
+      "reason": "Synthetic hypothesis",
+      "created_at": "2026-09-29T12:00:00.000Z",
+      "previous_hash": "445383b59919b0ec7a25d0327e9dd2458c3090247af43b21ac16423986ab381d",
+      "hash": "fe16ac0617531e7c73988b1e90469ace9aad76f1416ad1ed8c2562efdb3666e3"
+    },
+    {
+      "id": "C-demo004",
+      "type": "claim",
+      "origin": "human",
+      "title": "The prototype should preserve relationship types explicitly.",
+      "content": "Design claim for the prototype, not an empirical conclusion.",
+      "status": "Used in output",
+      "parent_id": "H-demo003",
+      "relation": "becomes",
+      "source_ref": "",
+      "reason": "Implemented as an alpha design requirement",
+      "created_at": "2026-09-29T12:00:00.000Z",
+      "previous_hash": "fe16ac0617531e7c73988b1e90469ace9aad76f1416ad1ed8c2562efdb3666e3",
+      "hash": "087a3722bfb26cf45259b82d39ba95ec6c3b8cb55354793e2f6f024836f5afb5"
+    }
+  ]
+}

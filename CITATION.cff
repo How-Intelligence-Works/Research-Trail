@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use Research Trail, please cite the archived release when a DOI-bearing release becomes available."
+title: "Research Trail"
+type: software
+version: "0.1.0a1"
+date-released: 2026-09-29
+license: MIT
+repository-code: "https://github.com/How-Intelligence-Works/Research-Trail"
+url: "https://howintelligenceworks.com"
+authors:
+  - name: "How Intelligence Works"
